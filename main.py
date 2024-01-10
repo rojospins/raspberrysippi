@@ -67,6 +67,7 @@ def display_schedule():
             tram_name = tram_name.replace("Tram", "").strip()
             stop_name = stop_name.replace("Darmstadt", "").strip()
             direction = direction.replace("Darmstadt", "").strip()
+            direction = direction.replace("-", "").strip()
 
             departures.append(
                 f" Linie {tram_name}, {stop_name}, Departure Time: {departure_time}, Direction: {direction}")
@@ -88,10 +89,11 @@ def display_schedule():
             tram_name = tram_name.replace("Tram", "").strip()
             stop_name = stop_name.replace("Darmstadt-", "").strip()
             stop_name = stop_name.replace("Darmstadt", "").strip()
-            direction = direction.replace("Darmstadt-", "").strip()
             direction = direction.replace("Am Hinkelstein", "").strip()
             direction = direction.replace("-Alsbach", "").strip()
-            direction = direction.replace("Darmstadt", "").strip()
+            direction = direction.replace("Darmstadt-", "").strip()
+            direction = direction.replace(" -", "").strip()
+
 
             departures.append(
                 f" Linie {tram_name}, {stop_name}, Departure Time: {departure_time}, Direction: {direction}")
@@ -207,10 +209,10 @@ frame = tk.Frame(root, bg="#3c4359")
 frame.pack(expand=True, fill="both")
 
 # Set custom font for the listbox
-custom_font = font.Font(family="Arial", size=14)
+custom_font = font.Font(family="Arial", size=16)
 
 # Creating a listbox
-listbox = tk.Listbox(frame, width=80, height=10, font=custom_font, bg="#3c4359", fg="white")
+listbox = tk.Listbox(frame, width=80, height=int(10.5), font=custom_font, bg="#3c4359", fg="white")
 listbox.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
 # weather and temperature monitor
@@ -226,7 +228,7 @@ tk_image = ImageTk.PhotoImage(pillow_image)
 
 # icon label
 icon_Label = tk.Label(frame, image="", bg="#3c4359", anchor="w")
-icon_Label.grid(row=2, column=0, columnspan=2, pady=0, padx=10)
+# icon_Label.grid(row=2, column=0, columnspan=2, pady=0, padx=10)
 
 # Configure grid weights to make the Listbox expandable
 root.columnconfigure(0, weight=1)
@@ -235,7 +237,7 @@ root.rowconfigure(0, weight=1)
 # Call the display_schedule function initially to display the schedule
 display_schedule()
 display_weather()
-display_icons()
+# display_icons()
 
 # Run the Tkinter event loop
 root.mainloop()
